@@ -17,12 +17,10 @@ Server::Server() :
 }
 
 void Server::rgbd_callback(sensor_msgs::ImageConstPtr rgb,
-                            sensor_msgs::ImageConstPtr depth,
-                            sensor_msgs::CameraInfoConstPtr info)
+                           sensor_msgs::ImageConstPtr depth,
+                           sensor_msgs::CameraInfoConstPtr info)
 {
-  // convert to opencv format
-
-  // apply calibration (initialize if needed)
+  // initialize calibration if needed
 
   // initialize keyframe features if needed
 
