@@ -13,6 +13,7 @@
 #include <relative_nav/Keyframe.h>
 
 #include <rgbd_svo/rgbd_svo.h>
+#include <rgbd_svo/feature.h>
 
 #include <vector>
 
@@ -41,7 +42,7 @@ private:
   ros::Publisher keyframe_publisher_;
 
   RGBD_SVO vo_;
-  std::vector<RGBD_SVO::Feature> keyframe_features_;
+  std::vector<Feature> keyframe_features_;
 };
 
 } // namespace rgbd_svo

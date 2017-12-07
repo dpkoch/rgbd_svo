@@ -9,20 +9,14 @@
 
 #include <vector>
 
+#include <rgbd_svo/feature.h>
+
 namespace rgbd_svo
 {
 
 class RGBD_SVO
 {
 public:
-  struct Feature
-  {
-    float u;
-    float v;
-    float Z;
-    cv::Mat patch;
-  };
-
   RGBD_SVO();
 
   void set_calibration_parameters(const sensor_msgs::CameraInfo& rgb_info, const sensor_msgs::CameraInfo& depth_info);
