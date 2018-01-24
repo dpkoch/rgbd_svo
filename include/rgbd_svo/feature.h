@@ -1,7 +1,9 @@
 #ifndef RGBD_SVO_FEATURE_H
 #define RGBD_SVO_FEATURE_H
 
-#include <opencv/cv.h>
+#include <cv_bridge/cv_bridge.h>
+
+#include <vector>
 
 namespace rgbd_svo
 {
@@ -9,22 +11,24 @@ namespace rgbd_svo
 class Feature
 {
 public:
-  Feature(double u, double v, const cv::Mat& rgb, const cv::Mat& depth);
+  static std::vector<Feature> get_features(const cv::Mat& gray, const cv::Mat& depth, double fx, double fy, double u0, double v0);
 
-  const double& u() const;
-  const double& v() const;
-  const double& depth() const;
-  const cv::Mat& patch() const;
-  const cv::Mat& jacobian() const;
-
-  double& u();
-  double& v();
-  double& depth();
+public:
+  const cv::Point2f& coordinate() const { return coordinate_; }
+  const cv::Point3d& point_3D() const { return point_3D_; }
+  double depth() const { return depth_; }
+  const cv::Mat& patch() const { return patch_; }
+  const cv::Mat& jacobian() const { return jacobian_; }
 
 private:
-  double u_;
-  double v_;
+  static constexpr int MAX_FEATURES = 200;
+  static constexpr int PATCH_SIZE = 4;
+  static constexpr int FEATURE_VECTOR_SIZE = PATCH_SIZE*PATCH_SIZE;
+
+  cv::Point2f coordinate_;
+  cv::Point3d point_3D_;
   double depth_;
+
   cv::Mat patch_;
   cv::Mat jacobian_;
 };

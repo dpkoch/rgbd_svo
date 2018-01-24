@@ -5,7 +5,7 @@
 #include <sensor_msgs/CameraInfo.h>
 #include <sensor_msgs/Image.h>
 
-#include <opencv/cv.h>
+#include <cv_bridge/cv_bridge.h>
 
 #include <vector>
 
@@ -26,12 +26,14 @@ public:
                                              const sensor_msgs::Image& keyframe_depth,
                                              const sensor_msgs::Image& current_rgb,
                                              const sensor_msgs::Image& current_depth,
+                                             const sensor_msgs::CameraInfo &info,
                                              bool calibrate = true);
 
   geometry_msgs::Transform compute_transform(sensor_msgs::ImageConstPtr keyframe_rgb,
                                              sensor_msgs::ImageConstPtr keyframe_depth,
                                              sensor_msgs::ImageConstPtr current_rgb,
                                              sensor_msgs::ImageConstPtr current_depth,
+                                             sensor_msgs::CameraInfoConstPtr info,
                                              bool calibrate = true);
 
   geometry_msgs::Transform compute_transform(const std::vector<Feature>& keyframe_features,
@@ -46,10 +48,12 @@ public:
 
   std::vector<Feature> extract_features(const sensor_msgs::Image& rgb,
                                         const sensor_msgs::Image& depth,
+                                        const sensor_msgs::CameraInfo &info,
                                         bool calibrate = true);
 
   std::vector<Feature> extract_features(sensor_msgs::ImageConstPtr rgb,
                                         sensor_msgs::ImageConstPtr depth,
+                                        sensor_msgs::CameraInfoConstPtr info,
                                         bool calibrate = true);
 };
 

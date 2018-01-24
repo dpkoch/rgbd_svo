@@ -1,7 +1,7 @@
 #ifndef RGBD_SVO_CAMERA_MODEL_H
 #define RGBD_SVO_CAMERA_MODEL_H
 
-#include <opencv/cv.h>
+#include <cv_bridge/cv_bridge.h>
 
 #include <vector>
 
@@ -13,8 +13,8 @@ namespace rgbd_svo
 class CameraModel
 {
 public:
-  set_parameters();
-  cv::Mat undistort(const cv::Mat& image);
+  void set_parameters();
+  void undistort(cv::Mat& image);
   cv::Mat undistort_points(std::vector<Feature> points_);
 };
 
